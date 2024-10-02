@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class ToDoListeApp {
 
-    // Klasa reprezentująca pojedyncze zadanie
     static class Aufgabe {
         String name;
         boolean istErledigt;
@@ -13,7 +12,6 @@ public class ToDoListeApp {
             this.istErledigt = false;
         }
 
-        // Oznacz zadanie jako zakończone
         void markiereAlsErledigt() {
             this.istErledigt = true;
         }
@@ -38,7 +36,6 @@ public class ToDoListeApp {
                 }
             }
 
-            // Menu
             System.out.println("\nWähle eine Option:");
             System.out.println("1. Aufgabe hinzufügen");
             System.out.println("2. Aufgabe entfernen");
@@ -47,16 +44,14 @@ public class ToDoListeApp {
             System.out.print("Deine Wahl: ");
 
             int wahl = scanner.nextInt();
-            scanner.nextLine();  // Konsumowanie nowej linii po wyborze opcji
+            scanner.nextLine();
 
             if (wahl == 1) {
-                // Dodanie nowego zadania
                 System.out.print("Gib den Namen der Aufgabe ein: ");
                 String aufgabenName = scanner.nextLine();
                 aufgaben.add(new Aufgabe(aufgabenName));
                 System.out.println("Aufgabe wurde hinzugefügt.");
             } else if (wahl == 2) {
-                // Usunięcie zadania
                 System.out.print("Gib die Nummer der Aufgabe ein, die entfernt werden soll: ");
                 int aufgabenNummer = scanner.nextInt();
                 if (aufgabenNummer > 0 && aufgabenNummer <= aufgaben.size()) {
@@ -66,7 +61,6 @@ public class ToDoListeApp {
                     System.out.println("Ungültige Aufgabennummer.");
                 }
             } else if (wahl == 3) {
-                // Oznaczenie zadania jako ukończone
                 System.out.print("Gib die Nummer der Aufgabe ein, die als erledigt markiert werden soll: ");
                 int aufgabenNummer = scanner.nextInt();
                 if (aufgabenNummer > 0 && aufgabenNummer <= aufgaben.size()) {
@@ -76,7 +70,6 @@ public class ToDoListeApp {
                     System.out.println("Ungültige Aufgabennummer.");
                 }
             } else if (wahl == 4) {
-                // Wyjście z aplikacji
                 System.out.println("Programm wird geschlossen.");
                 break;
             } else {
