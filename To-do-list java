@@ -1,0 +1,89 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ToDoListeApp {
+
+    // Klasa reprezentująca pojedyncze zadanie
+    static class Aufgabe {
+        String name;
+        boolean istErledigt;
+
+        Aufgabe(String name) {
+            this.name = name;
+            this.istErledigt = false;
+        }
+
+        // Oznacz zadanie jako zakończone
+        void markiereAlsErledigt() {
+            this.istErledigt = true;
+        }
+
+        @Override
+        public String toString() {
+            return name + " [" + (istErledigt ? "✔" : "✘") + "]";
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Aufgabe> aufgaben = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\nTo-Do-Liste:");
+            if (aufgaben.isEmpty()) {
+                System.out.println("Keine Aufgaben in der Liste.");
+            } else {
+                for (int i = 0; i < aufgaben.size(); i++) {
+                    System.out.println((i + 1) + ". " + aufgaben.get(i));
+                }
+            }
+
+            // Menu
+            System.out.println("\nWähle eine Option:");
+            System.out.println("1. Aufgabe hinzufügen");
+            System.out.println("2. Aufgabe entfernen");
+            System.out.println("3. Aufgabe als erledigt markieren");
+            System.out.println("4. Beenden");
+            System.out.print("Deine Wahl: ");
+
+            int wahl = scanner.nextInt();
+            scanner.nextLine();  // Konsumowanie nowej linii po wyborze opcji
+
+            if (wahl == 1) {
+                // Dodanie nowego zadania
+                System.out.print("Gib den Namen der Aufgabe ein: ");
+                String aufgabenName = scanner.nextLine();
+                aufgaben.add(new Aufgabe(aufgabenName));
+                System.out.println("Aufgabe wurde hinzugefügt.");
+            } else if (wahl == 2) {
+                // Usunięcie zadania
+                System.out.print("Gib die Nummer der Aufgabe ein, die entfernt werden soll: ");
+                int aufgabenNummer = scanner.nextInt();
+                if (aufgabenNummer > 0 && aufgabenNummer <= aufgaben.size()) {
+                    aufgaben.remove(aufgabenNummer - 1);
+                    System.out.println("Aufgabe wurde entfernt.");
+                } else {
+                    System.out.println("Ungültige Aufgabennummer.");
+                }
+            } else if (wahl == 3) {
+                // Oznaczenie zadania jako ukończone
+                System.out.print("Gib die Nummer der Aufgabe ein, die als erledigt markiert werden soll: ");
+                int aufgabenNummer = scanner.nextInt();
+                if (aufgabenNummer > 0 && aufgabenNummer <= aufgaben.size()) {
+                    aufgaben.get(aufgabenNummer - 1).markiereAlsErledigt();
+                    System.out.println("Aufgabe wurde als erledigt markiert.");
+                } else {
+                    System.out.println("Ungültige Aufgabennummer.");
+                }
+            } else if (wahl == 4) {
+                // Wyjście z aplikacji
+                System.out.println("Programm wird geschlossen.");
+                break;
+            } else {
+                System.out.println("Ungültige Wahl. Bitte versuche es erneut.");
+            }
+        }
+
+        scanner.close();
+    }
+}
